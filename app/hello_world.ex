@@ -1,11 +1,4 @@
 defmodule HelloWorld do
-
-  # def say do
-  #   IO.puts "Hello World!"
-  # end
-
-  # HelloWorld.say
-
   def greet(person) do
     IO.puts "Hello, #{person}! My pid is #{inspect self}."
     receive do
@@ -13,3 +6,6 @@ defmodule HelloWorld do
     end
   end
 end
+
+# iex hello_world.ex
+# pid = spawn(HelloWorld, :greet, ["Taro"])
