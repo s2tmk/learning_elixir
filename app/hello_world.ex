@@ -3,6 +3,7 @@ defmodule HelloWorld do
     IO.puts "Hello, #{person}! My pid is #{inspect self}."
     receive do
       message -> IO.puts "Message is #{message}."
+      greet(person)
     end
   end
 end
