@@ -33,7 +33,6 @@ defmodule Counter do
     {:noreply, state}
   end
 
-
 end
 
 # プロセスを起動する
