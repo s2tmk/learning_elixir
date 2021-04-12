@@ -1,6 +1,11 @@
 defmodule Counter do
   use GenServer
 
+  def start_link(state, opts) do
+    IO.puts "--- Counter.start_link(#{inspect state}, #{inspect opts}) called ---"
+    GenServer.start_link(__MODULE__, state, opts)
+  end
+
   # GenServer起動時に実行される（処理がなければ省略可）
   def init(state) do
     IO.puts "--- init(#{inspect state}) called ---"
@@ -35,5 +40,14 @@ defmodule Counter do
 
 end
 
-# プロセスを起動する
-# GenServer.start_link(Counter, 0)
+# iex counter_server.ex
+# import Supervisor.Spec
+# children = [worker(Counter, [5, [name: :counter_process]])]
+# Supervisor.start_link(children, strategy: :one_for_one)
+# GenServer.call(:counter_process, :up)
+# GenServer.cast(:counter_process, :down)
+
+# プロセスに命名したことでpidなしで呼び出せるようになったが、必要な場合は以下の通り呼び出せる。
+# pid = :erlang.whereis(:counter_process)
+
+# Process.exit(pid, "Can you reboot？")
